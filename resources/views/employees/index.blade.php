@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('title','พนักงาน')
+@section('content')
+<div class="pagehead"><div><h1>พนักงาน</h1><div class="muted">จัดการบัญชีและสิทธิ์ผู้ใช้งาน</div></div><a class="btn" href="{{ route('employees.create') }}">＋ เพิ่มพนักงาน</a></div><div class="card"><div class="table-wrap"><table><thead><tr><th>ชื่อ</th><th>อีเมล</th><th>โทรศัพท์</th><th>สิทธิ์</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>@forelse($employees as $employee)<tr><td>{{ $employee->name }}</td><td>{{ $employee->email }}</td><td>{{ $employee->phone ?? '—' }}</td><td><span class="badge {{ $employee->isAdmin()?'green':'' }}">{{ $employee->isAdmin()?'Admin':'Staff' }}</span></td><td><span class="badge {{ $employee->is_active?'green':'red' }}">{{ $employee->is_active?'ใช้งาน':'ระงับ' }}</span></td><td><a class="btn small light" href="{{ route('employees.edit',$employee) }}">แก้ไข</a></td></tr>@empty<tr><td class="empty" colspan="6">ไม่พบข้อมูล</td></tr>@endforelse</tbody></table></div><div class="pagination">{{ $employees->links() }}</div></div>
+@endsection

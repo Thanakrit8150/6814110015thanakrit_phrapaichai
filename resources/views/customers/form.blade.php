@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('title',$customer->exists?'แก้ไขลูกค้า':'เพิ่มลูกค้า')
+@section('content')
+<div class="pagehead"><div><h1>{{ $customer->exists?'แก้ไขข้อมูลลูกค้า':'เพิ่มลูกค้า' }}</h1><div class="muted">ข้อมูลติดต่อและหมายเหตุ</div></div><a class="btn light" href="{{ route('customers.index') }}">← กลับ</a></div><div class="card" style="max-width:760px"><form method="post" action="{{ $customer->exists?route('customers.update',$customer):route('customers.store') }}">@csrf @if($customer->exists)@method('put')@endif<div class="form-grid"><div><label>ชื่อ-นามสกุล *</label><input name="name" value="{{ old('name',$customer->name) }}" maxlength="150" required></div><div><label>โทรศัพท์</label><input name="phone" value="{{ old('phone',$customer->phone) }}" maxlength="40"></div><div class="full"><label>อีเมล</label><input name="email" type="email" value="{{ old('email',$customer->email) }}" maxlength="190"></div><div class="full"><label>หมายเหตุ</label><textarea name="note" rows="4" maxlength="2000">{{ old('note',$customer->note) }}</textarea></div></div><button style="margin-top:18px">บันทึกข้อมูล</button></form></div>
+@endsection
